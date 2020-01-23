@@ -93,6 +93,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 // handleFunc passes the requested path to the correct router handler
-func (s *Server) handleFunc(path string, fn http.HandlerFunc) *mux.Route {
+func (s *Server) HandleFunc(path string, fn http.HandlerFunc) *mux.Route {
 	return s.router.HandleFunc("/"+strings.TrimLeft(path, "/"), fn)
 }

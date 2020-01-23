@@ -6,8 +6,9 @@ import (
 	"sync"
 	"time"
 
+	_ "github.com/jackc/pgx/v4/stdlib" // postgres driver
 	"github.com/jmoiron/sqlx"
-	_ "github.com/lib/pq" // postgres driver
+	// _ "github.com/lib/pq"
 
 	"github.com/ysergeyru/go-task-foxg/config"
 	"github.com/ysergeyru/go-task-foxg/logger"
@@ -38,7 +39,7 @@ func DB() *PgDB {
 
 func connect() (*PgDB, error) {
 	cfg := config.Get()
-	db, err := sqlx.Open("postgres", fmt.Sprintf("sslmode=disable host=%s port=%s user=%s dbname=%s password=%s", cfg.PostgresHost, cfg.PostgresPort, cfg.PostgresUser, cfg.PostgresDB, cfg.PostgresPass))
+	db, err := sqlx.Open("pgx", fmt.Sprintf("sslmode=disable host=%s port=%s user=%s dbname=%s password=%s", cfg.PostgresHost, cfg.PostgresPort, cfg.PostgresUser, cfg.PostgresDB, cfg.PostgresPass))
 	db.SetMaxIdleConns(cfg.PostgresMaxIdleConns)
 	db.SetMaxOpenConns(cfg.PostgresMaxOpenConns)
 	if err != nil {
