@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "ef67d95e-0218-4daa-a9d3-d43d6af0dc6a",
+		"name": "REST Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/ok",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8000/ok"
+			},
+			"response": []
+		},
+		{
+			"name": "/{first_user_id}/{second_user_id} (handleUserLogDuplicatesCheck)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8000/1/2"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
