@@ -8,7 +8,7 @@ var schema = `
 
 CREATE TABLE conn_log (
 	user_id bigint,
-	ip_addr varchar(20),
+	ip_addr varchar(15),
 	ts timestamp
 );
 `
@@ -22,7 +22,9 @@ func init() {
 
 		return err
 	}, func(db migrations.DB) error {
-		_, err := db.Exec(`DROP TABLE if exists conn_log;`)
+		_, err := db.Exec(`
+			DROP TABLE if exists conn_log;
+			DROP TABLE if exists user_id_to_ip`)
 		if err != nil {
 			return err
 		}
