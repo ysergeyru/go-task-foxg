@@ -18,14 +18,14 @@ func TestHandleUserLogDuplicatesCheck(t *testing.T) {
 	// Create new server instance
 	s := server.New(config)
 
-	// Create a ResponseRecorder to record the response.
+	// Create a ResponseRecorder to record the response
 	rr := httptest.NewRecorder()
 
 	// Create handler
 	handler := s.HTTPHandler()
 
 	// Create a request
-	req, err := http.NewRequest("GET", "/"+strconv.Itoa(rand.Intn(100))+"/"+strconv.Itoa(rand.Intn(100)), nil)
+	req, err := http.NewRequest("GET", "/"+strconv.Itoa(rand.Intn(5)+1)+"/"+strconv.Itoa(rand.Intn(5)+1), nil)
 	if err != nil {
 		t.Fatal(err)
 	}

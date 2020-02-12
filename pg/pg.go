@@ -6,9 +6,9 @@ import (
 	"sync"
 	"time"
 
-	// _ "github.com/jackc/pgx/v4/stdlib" // postgres driver
+	// _ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/jmoiron/sqlx"
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq" // postgres driver
 
 	"github.com/ysergeyru/go-task-foxg/config"
 	"github.com/ysergeyru/go-task-foxg/logger"

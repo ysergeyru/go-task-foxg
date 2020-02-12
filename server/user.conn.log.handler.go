@@ -32,20 +32,20 @@ func (s *Server) HandleUserLogDuplicatesCheck(w http.ResponseWriter, r *http.Req
 		respond.With(w, r, http.StatusBadRequest, err)
 	}
 	// Get connections per user from Postgres
-	usersConnections, err := pg.GetConnectionsByUserIDs(firstUserID, secondUserID)
+	usersIPs, err := pg.GetConnectionsByUserIDs(firstUserID, secondUserID)
 	if err != nil {
 		s.logger.Error(err)
 		respond.With(w, r, http.StatusInternalServerError, err)
 		return
 	}
 
-	if len(usersConnections) == 0 {
+	if len(usersIPs) == 0 {
 		s.logger.Debugf("No connections found for user IDs %d and %d", firstUserID, secondUserID)
 		respond.With(w, r, http.StatusOK, types.DuplicateRespond{Duplicate: false})
 		return
 	}
 
-	if isDuplicate := utils.CheckForDuplicateIP(usersConnections); !isDuplicate {
+	if isDuplicate := utils.CheckForDuplicateIP(usersIPs); !isDuplicate {
 		s.logger.Debugf("No duplicates found for user IDs %d and %d", firstUserID, secondUserID)
 		respond.With(w, r, http.StatusOK, types.DuplicateRespond{Duplicate: false})
 		return
