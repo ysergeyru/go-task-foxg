@@ -32,8 +32,7 @@ func init() {
 
 			CREATE TABLE user_id_to_ip AS
 			SELECT DISTINCT user_id, ip_addr
-			FROM conn_log
-			ORDER BY user_id, ip_addr;
+			FROM conn_log;
 
 			CREATE INDEX user_id_ip_idx ON user_id_to_ip (user_id);
 		  `)
