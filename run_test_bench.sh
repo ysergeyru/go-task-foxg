@@ -1,3 +1,3 @@
 #!/bin/bash
-export CONFIG_PATH=~/go/src/github.com/ysergeyru/go-task-foxg/config
+export CONFIG_PATH=../../config
 STAGE=development go test -bench=. cmd/service/*.go
