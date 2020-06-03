@@ -24,12 +24,12 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	config := config.Get()
+	cfg := config.Get()
 	db := pg.Connect(&pg.Options{
-		Addr:     config.PostgresHost + ":" + config.PostgresPort,
-		Database: config.PostgresDB,
-		User:     config.PostgresUser,
-		Password: config.PostgresPass,
+		Addr:     cfg.PostgresHost + ":" + cfg.PostgresPort,
+		Database: cfg.PostgresDB,
+		User:     cfg.PostgresUser,
+		Password: cfg.PostgresPass,
 	})
 
 	oldVersion, newVersion, err := migrations.Run(db, flag.Args()...)
