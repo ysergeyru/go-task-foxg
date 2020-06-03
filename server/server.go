@@ -14,8 +14,6 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-
-	respond "gopkg.in/matryer/respond.v1"
 )
 
 // CORS Configuration
@@ -53,10 +51,6 @@ func New(config *config.Config) *Server {
 	}
 	// Map server routes
 	s.mapRoutes()
-	// Setup CORS
-	if len(config.AllowedOrigins) > 0 {
-		apiCORS.AllowedOrigins = strings.Split(config.AllowedOrigins, ",")
-	}
 
 	return s
 }
@@ -64,26 +58,9 @@ func New(config *config.Config) *Server {
 // HTTPHandler gets the http.Handler for this Server
 func (s *Server) HTTPHandler() http.Handler {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Default Secure Headers
-		// See https://scotthelme.co.uk/hardening-your-http-response-headers/
-		w.Header().Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
-		w.Header().Set("X-Frame-Options", "DENY")
-		w.Header().Set("X-Xss-Protection", "1; mode=block")
-		// Breaks IE11 handler when set - header is removed in api.image.handler.go writeImage and writeRaw
-		w.Header().Set("X-Content-Type-Options", "nosniff")
-
-		// If it's OPTIONS just allow and retun HTTP Status OK (for CORS)
-		if strings.ToUpper(r.Method) == OPTIONS {
-			respond.With(w, r, http.StatusOK, ok)
-			return
-		}
-
 		s.router.ServeHTTP(w, r)
 	})
-	// Skip CORS if disabled in config
-	if config.Get().CORS {
-		return cors.New(apiCORS).Handler(handler)
-	}
+
 	return handler
 }
 

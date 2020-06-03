@@ -1,2 +1,3 @@
 #!/bin/bash
-STAGE=development go run cmd/service/main.go
+source cmd/service/env.sh
+go run cmd/service/main.go

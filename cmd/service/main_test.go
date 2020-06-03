@@ -21,9 +21,6 @@ func TestHandleUserLogDuplicatesCheck(t *testing.T) {
 	// Create a ResponseRecorder to record the response
 	rr := httptest.NewRecorder()
 
-	// Create handler
-	handler := s.HTTPHandler()
-
 	// Create a request
 	req, err := http.NewRequest("GET", "/"+strconv.Itoa(rand.Intn(5)+1)+"/"+strconv.Itoa(rand.Intn(5)+1), nil)
 	if err != nil {
@@ -31,7 +28,7 @@ func TestHandleUserLogDuplicatesCheck(t *testing.T) {
 	}
 
 	// Call handler's ServeHTTP method directly and pass in our Request and ResponseRecorder.
-	handler.ServeHTTP(rr, req)
+	s.ServeHTTP(rr, req)
 
 	// Check the status code is what we expect.
 	if status := rr.Code; status != http.StatusOK {

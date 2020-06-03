@@ -39,9 +39,8 @@ func DB() *PgDB {
 
 func connect() (*PgDB, error) {
 	cfg := config.Get()
+
 	db, err := sqlx.Open("postgres", fmt.Sprintf("sslmode=disable host=%s port=%s user=%s dbname=%s password=%s", cfg.PostgresHost, cfg.PostgresPort, cfg.PostgresUser, cfg.PostgresDB, cfg.PostgresPass))
-	db.SetMaxIdleConns(cfg.PostgresMaxIdleConns)
-	db.SetMaxOpenConns(cfg.PostgresMaxOpenConns)
 	if err != nil {
 		log.Fatal("sql.Open failed:", err)
 	}
@@ -49,6 +48,7 @@ func connect() (*PgDB, error) {
 	if err := db.Ping(); err != nil {
 		return nil, err
 	}
+
 	return &PgDB{db}, nil
 }
 

@@ -1,7 +1,0 @@
-development:
-    addr: localhost:8000
-    postgres_host: "localhost"
-    postgres_port: 5432
-    postgres_user: ""
-    postgres_pass: ""
-    postgres_db: "service_data"

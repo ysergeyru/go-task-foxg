@@ -9,14 +9,14 @@ Clone repository to your local machine.
 
 Run instance of PostgreSQL and create db named 'service_data'.
 
-Fill credentials for db user in file ./config/development/config.yaml
+Fill credentials for db user in file ./cmd/service/env.sh
 
-Run 'prepare_db_test_data.sh' to generate test data.
+Run ./prepare_db_test_data.sh to generate test data.
 
 Be patient, generating of more than 10 million records in 'conn_log' table can take some time.
 
 Now you can run project by ./rundev.sh script
 
-And benchmark test with ./run_test_bench.sh
+Run benchmark test with ./run_test_bench.sh
 
-Postman tests are here ./postman/
+Postman tests collection is here ./postman/REST Service.postman_collection.json

@@ -18,7 +18,7 @@ const Version = "0.1"
 
 func main() {
 	// Read config
-	config := config.Get()
+	cfg := config.Get()
 	// Init logger
 	logger := logger.Get()
 	// Init Postgres
@@ -27,11 +27,11 @@ func main() {
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)
 	// Create new server instance
-	server := server.New(config)
-	httpServer := &http.Server{Addr: config.Addr, Handler: server.HTTPHandler()}
+	server := server.New(cfg)
+	httpServer := &http.Server{Addr: cfg.Addr, Handler: server.HTTPHandler()}
 	// Run it
 	go func() {
-		logger.Infof("Listening on %s", config.Addr)
+		logger.Infof("Listening on %s", cfg.Addr)
 		if err := httpServer.ListenAndServe(); err != nil {
 			logger.Fatal(err)
 		}
