@@ -17,6 +17,8 @@ Be patient, generating of more than 10 million records in 'conn_log' table can t
 
 Now you can run project by ./rundev.sh script
 
-Run benchmark test with ./run_test_bench.sh
+Send request from console: 'curl --location --request GET 'http://localhost:8000/2/4''
 
-Postman tests collection is here ./postman/REST Service.postman_collection.json
+Also you can use Postman. Tests collection is here ./postman/REST Service.postman_collection.json
+
+Run benchmark test with ./run_test_bench.sh
